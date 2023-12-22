@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'drf_spectacular',
+    'django_filters',
     'users',
     'recipes',
 ]
@@ -132,6 +133,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication'
     ],
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ],
 }
 
 SIMPLE_JWT = {
@@ -141,3 +145,5 @@ SIMPLE_JWT = {
 AUTH_USER_MODEL = 'users.UserAccount'
 
 HUNTER_API_KEY = '3aa3050944e4a183a5b7c33547d170fadf940de6'
+
+CLEARBIT_API_KEY = "api_key_generated_by_clearbit"

@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password
 from django.core import exceptions
-from .utils import validate_email
+from .utils import validate_email, clearbit_additional
 
 User = get_user_model()
 
@@ -48,7 +48,11 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         return representation
 
 class UserSerializer(serializers.ModelSerializer):
+    clearbit_info = serializers.SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email')
+        fields = ('first_name', 'last_name', 'email', 'clearbit_info')
+
+    def get_clearbit_info(self, obj):
+        return clearbit_additional(obj.email)
